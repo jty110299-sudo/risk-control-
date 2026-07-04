@@ -1,0 +1,140 @@
+observed_loan_count:
+  metric_name: observed_loan_count
+  business_meaning: Number of observed loans in the monitoring period.
+  formula: count_distinct(loan_id)
+  numerator: observed loans
+  denominator: not applicable
+  mvp_support_status: supported_in_phase5_monitoring_table
+  public_data_support: partially_supported_by_freddie_mac
+  notes: Requires verified loan identifier and monitoring period.
+
+delinquent_loan_count:
+  metric_name: delinquent_loan_count
+  business_meaning: Number of loans with candidate delinquency status.
+  formula: count(loans where delinquency_status > 0)
+  numerator: loans with delinquency status greater than 0
+  denominator: not applicable
+  mvp_support_status: supported_in_phase5_monitoring_table
+  public_data_support: partially_supported_by_freddie_mac
+  notes: Candidate logic must be verified against official Freddie Mac documentation.
+
+delinquency_rate:
+  metric_name: delinquency_rate
+  business_meaning: Share of observed loans that are delinquent.
+  formula: delinquent_loan_count / observed_loan_count
+  numerator: delinquent_loan_count
+  denominator: observed_loan_count
+  mvp_support_status: supported_in_phase6_alert_engine
+  public_data_support: partially_supported_by_freddie_mac
+  notes: MVP alert rules can use this metric when the monitoring table exists.
+
+serious_delinquent_loan_count:
+  metric_name: serious_delinquent_loan_count
+  business_meaning: Number of loans with candidate serious delinquency status.
+  formula: count(loans where delinquency_status >= 3)
+  numerator: loans with delinquency status greater than or equal to 3
+  denominator: not applicable
+  mvp_support_status: supported_in_phase5_monitoring_table
+  public_data_support: partially_supported_by_freddie_mac
+  notes: Candidate logic must be verified against official Freddie Mac documentation.
+
+serious_delinquency_rate:
+  metric_name: serious_delinquency_rate
+  business_meaning: Share of observed loans that are seriously delinquent.
+  formula: serious_delinquent_loan_count / observed_loan_count
+  numerator: serious_delinquent_loan_count
+  denominator: observed_loan_count
+  mvp_support_status: supported_in_phase6_alert_engine
+  public_data_support: partially_supported_by_freddie_mac
+  notes: High-risk rules require human confirmation.
+
+default_proxy_count:
+  metric_name: default_proxy_count
+  business_meaning: Candidate count of loans meeting a documented default proxy.
+  formula: count(loans matching verified default proxy)
+  numerator: loans matching verified default proxy
+  denominator: not applicable
+  mvp_support_status: future_if_field_available
+  public_data_support: requires_verified_freddie_mac_field
+  notes: Not active until default proxy fields are verified.
+
+default_proxy_rate:
+  metric_name: default_proxy_rate
+  business_meaning: Share of observed loans meeting a documented default proxy.
+  formula: default_proxy_count / observed_loan_count
+  numerator: default_proxy_count
+  denominator: observed_loan_count
+  mvp_support_status: future_if_field_available
+  public_data_support: requires_verified_freddie_mac_field
+  notes: Not active until default proxy fields are verified.
+
+approval_rate:
+  metric_name: approval_rate
+  business_meaning: Share of applications approved.
+  formula: approved_count / application_count
+  numerator: approved_count
+  denominator: application_count
+  mvp_support_status: auxiliary_future_support
+  public_data_support: supported_by_hmda_auxiliary_source
+  notes: HMDA-oriented future metric, not Freddie Mac credit performance MVP.
+
+rejection_rate:
+  metric_name: rejection_rate
+  business_meaning: Share of applications rejected or denied.
+  formula: rejected_count / application_count
+  numerator: rejected_count
+  denominator: application_count
+  mvp_support_status: auxiliary_future_support
+  public_data_support: supported_by_hmda_auxiliary_source
+  notes: HMDA-oriented future metric.
+
+bad_rate:
+  metric_name: bad_rate
+  business_meaning: Share of observed accounts meeting a bad outcome definition.
+  formula: bad_count / total_observed_users
+  numerator: bad_count
+  denominator: total_observed_users
+  mvp_support_status: future_requires_outcome_definition
+  public_data_support: potentially_supported_by_performance_data_after_definition
+  notes: Requires documented bad outcome definition before use.
+
+fraud_rate:
+  metric_name: fraud_rate
+  business_meaning: Share of applications or accounts identified as fraud cases.
+  formula: fraud_cases / application_count
+  numerator: fraud_cases
+  denominator: application_count
+  mvp_support_status: requires_synthetic_supplement_or_excluded_from_mvp
+  public_data_support: not_supported_by_public_freddie_mac_data
+  notes: Must be excluded from MVP unless approved synthetic supplement is clearly labeled.
+
+psi:
+  metric_name: psi
+  business_meaning: Population Stability Index for distribution drift.
+  formula: sum((current_share - baseline_share) * ln(current_share / baseline_share))
+  numerator: distribution shift terms
+  denominator: not applicable
+  mvp_support_status: future_metric
+  public_data_support: possible_after_baseline_definition
+  notes: Not implemented in Phase 6.
+
+auc:
+  metric_name: auc
+  business_meaning: Model ranking performance metric.
+  formula: future model evaluation metric
+  numerator: not applicable
+  denominator: not applicable
+  mvp_support_status: future_model_monitoring
+  public_data_support: requires_later_modeling_scope
+  notes: Not calculated in Phase 6 and no sklearn dependency is used.
+
+ks:
+  metric_name: ks
+  business_meaning: Model separation metric.
+  formula: max difference between cumulative good and bad distributions
+  numerator: not applicable
+  denominator: not applicable
+  mvp_support_status: future_model_monitoring
+  public_data_support: requires_later_modeling_scope
+  notes: Not calculated in Phase 6.
+

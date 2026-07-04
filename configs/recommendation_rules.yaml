@@ -1,0 +1,50 @@
+recommendation_policy:
+  allowed_style:
+    - "Review abnormal segments."
+    - "Check data quality before making business conclusions."
+    - "Investigate whether the high-risk segment requires manual review."
+    - "Recommend human confirmation before any operational change."
+  prohibited_style:
+    - "Automatically reject users."
+    - "Automatically reduce credit limits."
+    - "Automatically close channels."
+    - "Automatically modify production rules."
+    - "Automatically take a model offline."
+
+recommendations_by_risk_level:
+  Level 0:
+    - "Continue normal monitoring."
+  Level 1:
+    - "Increase monitoring frequency and verify whether the signal persists."
+  Level 2:
+    - "Conduct manual investigation on triggered metrics and related segments."
+  Level 3:
+    - "Start focused risk review with risk, data, and business stakeholders. Human confirmation is required before any operational change."
+  Level 4:
+    - "Escalate for emergency review. Human approval is required before any action."
+
+recommendations_by_alert_type:
+  delinquency_rate:
+    - "Review delinquency metric movement and related segment monitoring tables."
+  serious_delinquency_rate:
+    - "Review serious delinquency movement and confirm whether manual review is needed."
+  observed_loan_count:
+    - "Check data completeness, sample size, and source file coverage before business interpretation."
+  segment_contribution:
+    - "Review top contributing segments as investigation priorities, not causal proof."
+
+prohibited_recommendations:
+  - "automatically reject"
+  - "automatically reduce credit"
+  - "automatically close"
+  - "automatically modify"
+  - "take a model offline"
+  - "auto reject"
+  - "auto adjust"
+
+human_confirmation_policy:
+  high_risk_levels:
+    - Level 3
+    - Level 4
+  required_text: "Human confirmation is required before any operational change."
+

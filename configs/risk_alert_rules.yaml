@@ -1,0 +1,127 @@
+disclaimer: All thresholds are illustrative for the demo project and must be calibrated before real-world use.
+
+risk_levels:
+  Level 0: Normal
+  Level 1: Watch
+  Level 2: Medium Risk
+  Level 3: High Risk
+  Level 4: Critical Risk
+
+rules:
+  - rule_id: DELINQUENCY_RATE_ABSOLUTE_THRESHOLD
+    rule_name: Delinquency rate absolute threshold
+    metric: delinquency_rate
+    condition_type: absolute_threshold
+    operator: ">="
+    threshold: 0.05
+    risk_level: Level 2
+    description: Delinquency rate is above the illustrative MVP threshold.
+    evidence_required: delinquency_rate
+    human_confirmation_required: false
+    mvp_applicability: active_mvp
+    notes: Illustrative threshold, must be calibrated.
+
+  - rule_id: SERIOUS_DELINQUENCY_RATE_ABSOLUTE_THRESHOLD
+    rule_name: Serious delinquency rate absolute threshold
+    metric: serious_delinquency_rate
+    condition_type: absolute_threshold
+    operator: ">="
+    threshold: 0.02
+    risk_level: Level 3
+    description: Serious delinquency rate is above the illustrative MVP threshold.
+    evidence_required: serious_delinquency_rate
+    human_confirmation_required: true
+    mvp_applicability: active_mvp
+    notes: Illustrative high-risk threshold, must be calibrated.
+
+  - rule_id: DELINQUENCY_RATE_RELATIVE_INCREASE
+    rule_name: Delinquency rate relative increase from baseline
+    metric: delinquency_rate
+    condition_type: relative_change_from_baseline
+    operator: ">="
+    threshold: 0.20
+    risk_level: Level 2
+    description: Delinquency rate increased materially from baseline.
+    evidence_required: delinquency_rate_relative_change_from_baseline
+    human_confirmation_required: false
+    mvp_applicability: active_mvp
+    notes: Baseline window is configurable in the processing script.
+
+  - rule_id: OBSERVED_LOAN_COUNT_DROP
+    rule_name: Observed loan count drop from baseline
+    metric: observed_loan_count
+    condition_type: relative_change_from_baseline
+    operator: "<="
+    threshold: -0.30
+    risk_level: Level 1
+    description: Observed loan count dropped materially from baseline.
+    evidence_required: observed_loan_count_relative_change_from_baseline
+    human_confirmation_required: false
+    mvp_applicability: active_mvp
+    notes: May indicate sample size or data completeness issue.
+
+  - rule_id: BAD_RATE_INCREASE_FUTURE
+    rule_name: Bad rate increase
+    metric: bad_rate
+    condition_type: relative_change_from_baseline
+    operator: ">="
+    threshold: 0.20
+    risk_level: Level 2
+    description: Future bad-rate increase rule.
+    evidence_required: bad_rate_relative_change_from_baseline
+    human_confirmation_required: false
+    mvp_applicability: future_not_active
+    notes: Future rule, not active in MVP.
+
+  - rule_id: PSI_SEVERE_DRIFT_FUTURE
+    rule_name: PSI severe drift
+    metric: psi
+    condition_type: absolute_threshold
+    operator: ">="
+    threshold: 0.25
+    risk_level: Level 3
+    description: Future PSI severe drift rule.
+    evidence_required: psi
+    human_confirmation_required: true
+    mvp_applicability: future_not_active
+    notes: Future rule, not active in MVP.
+
+  - rule_id: AUC_DROP_FUTURE
+    rule_name: AUC drop
+    metric: auc
+    condition_type: relative_change_from_baseline
+    operator: "<="
+    threshold: -0.05
+    risk_level: Level 2
+    description: Future AUC drop rule.
+    evidence_required: auc_relative_change_from_baseline
+    human_confirmation_required: false
+    mvp_applicability: future_not_active
+    notes: Future model monitoring rule, not active in MVP.
+
+  - rule_id: KS_DROP_FUTURE
+    rule_name: KS drop
+    metric: ks
+    condition_type: relative_change_from_baseline
+    operator: "<="
+    threshold: -0.05
+    risk_level: Level 2
+    description: Future KS drop rule.
+    evidence_required: ks_relative_change_from_baseline
+    human_confirmation_required: false
+    mvp_applicability: future_not_active
+    notes: Future model monitoring rule, not active in MVP.
+
+  - rule_id: FRAUD_RATE_SPIKE_FUTURE
+    rule_name: Fraud rate spike
+    metric: fraud_rate
+    condition_type: relative_change_from_baseline
+    operator: ">="
+    threshold: 0.30
+    risk_level: Level 3
+    description: Future fraud-rate spike rule.
+    evidence_required: fraud_rate_relative_change_from_baseline
+    human_confirmation_required: true
+    mvp_applicability: future_not_active
+    notes: Future rule requiring approved data or synthetic supplement.
+

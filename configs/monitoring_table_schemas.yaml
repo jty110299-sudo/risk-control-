@@ -1,0 +1,93 @@
+daily_risk_metrics:
+  status: canonical_schema
+  grain: monitoring_period
+  note: >
+    daily_risk_metrics is a canonical project table name. For Freddie Mac MVP,
+    the time grain may be monthly and represented by monitoring_period.
+  required_columns:
+    - monitoring_period
+    - observed_loan_count
+    - delinquent_loan_count
+    - delinquency_rate
+  optional_columns:
+    - serious_delinquent_loan_count
+    - serious_delinquency_rate
+    - default_proxy_count
+    - default_proxy_rate
+  public_data_support: partially_supported_by_freddie_mac
+  mvp_status: included
+
+segment_risk_metrics:
+  status: canonical_schema
+  grain: monitoring_period_and_segment
+  required_columns:
+    - monitoring_period
+    - segment_type
+    - segment_value
+    - observed_loan_count
+    - delinquent_loan_count
+    - delinquency_rate
+  optional_columns:
+    - serious_delinquent_loan_count
+    - serious_delinquency_rate
+  public_data_support: partially_supported_by_freddie_mac
+  mvp_status: included_if_segment_fields_exist
+
+model_monitoring_metrics:
+  status: canonical_schema
+  grain: monitoring_period_and_model
+  required_columns:
+    - monitoring_period
+    - model_id
+  optional_columns:
+    - auc
+    - ks
+    - precision
+    - recall
+    - f1
+    - lift
+  public_data_support: requires_later_modeling_scope
+  mvp_status: excluded_from_phase5
+
+score_distribution:
+  status: canonical_schema
+  grain: monitoring_period_and_score_band
+  required_columns:
+    - monitoring_period
+    - score_band
+    - loan_count
+  optional_columns:
+    - loan_share
+    - delinquent_loan_count
+    - delinquency_rate
+  public_data_support: partially_supported_if_score_field_exists
+  mvp_status: placeholder_only
+
+feature_drift_metrics:
+  status: canonical_schema
+  grain: monitoring_period_and_feature
+  required_columns:
+    - monitoring_period
+    - feature_name
+  optional_columns:
+    - missing_rate
+    - mean_value
+    - psi
+    - csi
+  public_data_support: partially_supported_after_baseline_definition
+  mvp_status: placeholder_only
+
+strategy_rule_metrics:
+  status: canonical_schema
+  grain: monitoring_period_and_rule
+  required_columns:
+    - monitoring_period
+    - rule_id
+  optional_columns:
+    - rule_hit_count
+    - rule_hit_rate
+    - intercept_rate
+    - false_positive_rate
+  public_data_support: not_supported_by_public_freddie_mac_data
+  mvp_status: requires_synthetic_supplement_or_excluded
+

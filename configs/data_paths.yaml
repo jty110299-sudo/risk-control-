@@ -1,0 +1,8 @@
+project_root: .
+official_sample_dir: data/samples/official
+raw_data_dir: data/raw
+interim_data_dir: data/interim
+processed_data_dir: data/processed
+metadata_dir: data/metadata
+logs_dir: outputs/logs
+

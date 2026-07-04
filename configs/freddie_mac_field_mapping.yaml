@@ -1,0 +1,87 @@
+dataset: freddie_mac_single_family_loan_level
+status: field_mapping_draft_requires_verification
+notes: >
+  Field names are placeholders or draft mapping candidates until verified
+  against the official Freddie Mac file layout and user guide.
+
+sections:
+  origination_fields:
+    loan_id:
+      source_candidates:
+        - loan_sequence_number
+      required: true
+      notes: Candidate unique loan identifier. Must be verified against official file layout.
+    origination_period:
+      source_candidates:
+        - origination_date
+        - origination_month
+      required: false
+      notes: Candidate origination period field.
+    credit_score:
+      source_candidates:
+        - credit_score
+        - borrower_credit_score
+      required: false
+      notes: Candidate credit score or score-band source.
+    original_ltv:
+      source_candidates:
+        - original_ltv
+        - original_loan_to_value
+      required: false
+      notes: Candidate original loan-to-value field.
+
+  monthly_performance_fields:
+    reporting_period:
+      source_candidates:
+        - monthly_reporting_period
+        - reporting_period
+      required: true
+      notes: Candidate monthly performance reporting period.
+    current_loan_delinquency_status:
+      source_candidates:
+        - current_loan_delinquency_status
+        - delinquency_status
+      required: true
+      notes: Candidate delinquency status field for performance monitoring.
+    current_actual_upb:
+      source_candidates:
+        - current_actual_upb
+        - current_upb
+      required: false
+      notes: Candidate current unpaid principal balance field.
+    zero_balance_code:
+      source_candidates:
+        - zero_balance_code
+      required: false
+      notes: Candidate zero balance, default, or termination-related field.
+
+  derived_agent_fields:
+    monitoring_period:
+      source: reporting_period
+      required: true
+    observed_loan_count:
+      source: loan_id
+      required: true
+    delinquent_loan_count:
+      source: current_loan_delinquency_status
+      required: true
+    delinquency_rate:
+      source: current_loan_delinquency_status
+      required: true
+    serious_delinquent_loan_count:
+      source: current_loan_delinquency_status
+      required: false
+    serious_delinquency_rate:
+      source: current_loan_delinquency_status
+      required: false
+
+  unsupported_fields:
+    manual_review_rate:
+      status: requires_synthetic_supplement_or_exclusion_from_mvp
+    rule_hit_rate:
+      status: requires_synthetic_supplement_or_exclusion_from_mvp
+    fraud_rate:
+      status: requires_synthetic_supplement_or_exclusion_from_mvp
+    strategy_rule_metrics:
+      status: requires_synthetic_supplement_or_exclusion_from_mvp
+

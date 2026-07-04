@@ -1,0 +1,39 @@
+project_phase: "Phase 7 - Root Cause Analysis and Segment Contribution Engine"
+mvp_status: "framework_only_until_processed_monitoring_tables_exist"
+
+target_metrics:
+  primary_count_metric: delinquent_loan_count
+  primary_rate_metric: delinquency_rate
+  serious_count_metric: serious_delinquent_loan_count
+  serious_rate_metric: serious_delinquency_rate
+
+period_column: monitoring_period
+
+segment_columns:
+  segment_type: segment_type
+  segment_value: segment_value
+
+contribution_settings:
+  top_n_segments: 5
+  minimum_total_increase_for_contribution: 1
+  include_negative_changes: false
+  contribution_type: count_increase_share
+
+supported_analysis_types:
+  - segment_contribution
+  - metric_change_summary
+  - top_contributor_ranking
+  - alert_linked_root_cause_hints
+
+unsupported_analysis_types:
+  - causal_inference
+  - automated_strategy_change
+  - individual_user_fraud_accusation
+  - full_report_generation
+  - UI_display
+
+safety_notes:
+  - "Segment contribution is not causal proof."
+  - "Findings are investigation leads and require human review."
+  - "The Agent must not recommend automatic credit decisions."
+
