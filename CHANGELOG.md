@@ -1,5 +1,13 @@
 # Changelog
 
+## v2.0.1 - Positioning Clarification
+
+### Updated
+
+* Clarified that the project supports local MVP-level supervised model training, AUC / KS evaluation, lightweight tuning, and risk scoring on user-uploaded CSV files.
+* Clarified that the project does not include production-grade model training, production model deployment, LLM integration, real credit approval, or automatic business decisions.
+* Updated README, project summary, and GitHub showcase wording to avoid understating implemented local modeling capabilities.
+
 ## v2.0.0 - Product-grade Risk Control Agent Workbench
 
 ### Added

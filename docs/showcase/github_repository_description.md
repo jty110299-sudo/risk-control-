@@ -6,7 +6,7 @@
 
 ## Short Repository Description
 
-A Streamlit-based financial risk control monitoring assistant for credit risk metrics, rule-based alerts, root cause analysis, Markdown risk reports, and audit logs. Built as an educational portfolio project with public-dataset-first data governance.
+Risk Control Agent：一个基于 Streamlit 的本地 MVP 风控监控分析助手，支持信用风险分析、本地模型评分、规则预警、归因分析和 Markdown 风险报告生成。A local MVP risk control monitoring assistant for credit risk analysis, local model scoring, rule-based alerts, attribution, and reporting.
 
 ## GitHub Topics
 
@@ -23,13 +23,15 @@ A Streamlit-based financial risk control monitoring assistant for credit risk me
 
 ## README Opening Paragraph
 
-Risk Control Agent is a local MVP risk-control monitoring assistant for Credit Risk Monitoring. It combines public-dataset-first governance, data ingestion framework, metric calculation utilities, rule-based alerts, Root Cause Analysis, Markdown report generation, Streamlit dashboard, and audit logs. It is an educational portfolio project, not a production credit decisioning system.
+Risk Control Agent is a local MVP risk-control monitoring assistant for Credit Risk Monitoring. It combines public-dataset-first governance, CSV upload, local supervised model training and scoring, AUC / KS evaluation, rule-based alerts, Root Cause Analysis, Markdown report generation, Streamlit dashboard, and audit logs. It is an educational portfolio project, not a production credit decisioning system.
 
 ## Features List
 
 * Public dataset source design
 * Monitoring table construction framework
 * Risk metric calculation utilities
+* Local supervised model training and scoring
+* AUC / KS model evaluation
 * Rule-based alert engine
 * Root Cause Analysis and Segment Contribution
 * Markdown risk report generation
@@ -40,4 +42,4 @@ Risk Control Agent is a local MVP risk-control monitoring assistant for Credit R
 
 ## Safety Disclaimer
 
-This project does not use real personal financial data, does not perform real credit approval, does not train production models, does not integrate LLM APIs, and does not execute automatic business decisions.
+This project does not use real personal financial data, does not perform real credit approval, does not train or deploy production models, does not integrate LLM APIs, and does not execute automatic business decisions. Local model training is limited to user-uploaded data for MVP analysis and portfolio demonstration.
